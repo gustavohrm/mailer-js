@@ -19,14 +19,14 @@ export default defineConfig(({ mode }) => {
 
   const apiProxyConfig = {
     changeOrigin: true,
-    target: "http://127.0.0.1:3001"
+    target: "http://127.0.0.1:3001",
   };
 
   return {
     appType: "spa",
     build: {
       emptyOutDir: true,
-      outDir: buildOutputDir
+      outDir: buildOutputDir,
     },
     envDir: repoRoot,
     plugins: [tailwindcss()],
@@ -36,17 +36,17 @@ export default defineConfig(({ mode }) => {
       host: "127.0.0.1",
       port: publicServerPort,
       proxy: {
-        "/api": apiProxyConfig
+        "/api": apiProxyConfig,
       },
-      strictPort: true
+      strictPort: true,
     },
     server: {
       host: "127.0.0.1",
       port: publicServerPort,
       proxy: {
-        "/api": apiProxyConfig
+        "/api": apiProxyConfig,
       },
-      strictPort: true
-    }
+      strictPort: true,
+    },
   };
 });

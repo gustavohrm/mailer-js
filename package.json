@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "concurrently -k -n frontend,backend -c green,blue \"npm run dev --workspace @mailer/frontend\" \"cross-env PORT=3001 npm run dev --workspace @mailer/backend\"",
     "build": "npm run build --workspace @mailer/frontend && npm run build --workspace @mailer/backend",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write .",
     "test": "npm run test --workspace @mailer/backend",
     "test:unit": "npm run test:unit --workspace @mailer/backend",
     "test:integration": "npm run test:integration --workspace @mailer/backend",
@@ -17,7 +19,8 @@
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "prettier": "^3.8.1"
   },
   "type": "module"
 }

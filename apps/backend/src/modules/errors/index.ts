@@ -1,8 +1,4 @@
-export type AppErrorCode =
-  | "INVALID_REQUEST"
-  | "UNAUTHORIZED"
-  | "MAIL_SEND_FAILED"
-  | "INTERNAL_ERROR";
+export type AppErrorCode = "INVALID_REQUEST" | "UNAUTHORIZED" | "MAIL_SEND_FAILED" | "INTERNAL_ERROR";
 
 type AppErrorOptions = {
   cause?: unknown;
@@ -38,7 +34,7 @@ export function invalidRequest(message: string): AppError {
     code: "INVALID_REQUEST",
     expose: true,
     message,
-    statusCode: 400
+    statusCode: 400,
   });
 }
 
@@ -47,7 +43,7 @@ export function unauthorized(message = "Unauthorized"): AppError {
     code: "UNAUTHORIZED",
     expose: true,
     message,
-    statusCode: 401
+    statusCode: 401,
   });
 }
 
@@ -57,7 +53,7 @@ export function mailSendFailed(cause?: unknown): AppError {
     code: "MAIL_SEND_FAILED",
     expose: true,
     message: "Unable to send email right now.",
-    statusCode: 503
+    statusCode: 503,
   });
 }
 
@@ -67,6 +63,6 @@ export function internalError(cause?: unknown): AppError {
     code: "INTERNAL_ERROR",
     expose: true,
     message: "Internal server error",
-    statusCode: 500
+    statusCode: 500,
   });
 }

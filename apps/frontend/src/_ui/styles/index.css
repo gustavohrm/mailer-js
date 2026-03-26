@@ -20,7 +20,7 @@
   }
 
   button {
-    @apply disabled:cursor-not-allowed cursor-pointer;
+    @apply cursor-pointer disabled:cursor-not-allowed;
   }
 
   img {

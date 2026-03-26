@@ -9,7 +9,7 @@ function createMailModule(overrides = {}) {
       return "message-123";
     },
     async verifyConnection() {},
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -17,7 +17,7 @@ describe("POST /api/v1/mail/send", () => {
   it("returns 401 with a structured error when the bearer token is missing", async () => {
     const app = buildApp({
       authBearerToken: "secret-token",
-      mail: createMailModule()
+      mail: createMailModule(),
     });
 
     app.log.level = "silent";
@@ -27,9 +27,9 @@ describe("POST /api/v1/mail/send", () => {
       payload: {
         subject: "Hello",
         text: "Body",
-        to: "recipient@example.com"
+        to: "recipient@example.com",
       },
-      url: "/api/v1/mail/send"
+      url: "/api/v1/mail/send",
     });
 
     await app.close();
@@ -38,29 +38,29 @@ describe("POST /api/v1/mail/send", () => {
     expect(response.json()).toEqual({
       error: {
         code: "UNAUTHORIZED",
-        message: "Unauthorized"
-      }
+        message: "Unauthorized",
+      },
     });
   });
 
   it("returns 400 with INVALID_REQUEST when the body is invalid", async () => {
     const app = buildApp({
       authBearerToken: "secret-token",
-      mail: createMailModule()
+      mail: createMailModule(),
     });
 
     app.log.level = "silent";
 
     const response = await app.inject({
       headers: {
-        authorization: "Bearer secret-token"
+        authorization: "Bearer secret-token",
       },
       method: "POST",
       payload: {
         subject: "Hello",
-        to: "recipient@example.com"
+        to: "recipient@example.com",
       },
-      url: "/api/v1/mail/send"
+      url: "/api/v1/mail/send",
     });
 
     await app.close();
@@ -69,8 +69,8 @@ describe("POST /api/v1/mail/send", () => {
     expect(response.json()).toEqual({
       error: {
         code: "INVALID_REQUEST",
-        message: "Field 'text' is required"
-      }
+        message: "Field 'text' is required",
+      },
     });
   });
 
@@ -80,23 +80,23 @@ describe("POST /api/v1/mail/send", () => {
       mail: createMailModule({
         async sendEmail() {
           throw mailSendFailed(new Error("smtp auth failed for user real-user@example.com"));
-        }
-      })
+        },
+      }),
     });
 
     app.log.level = "silent";
 
     const response = await app.inject({
       headers: {
-        authorization: "Bearer secret-token"
+        authorization: "Bearer secret-token",
       },
       method: "POST",
       payload: {
         subject: "Hello",
         text: "Body",
-        to: "recipient@example.com"
+        to: "recipient@example.com",
       },
-      url: "/api/v1/mail/send"
+      url: "/api/v1/mail/send",
     });
 
     await app.close();
@@ -105,8 +105,8 @@ describe("POST /api/v1/mail/send", () => {
     expect(response.json()).toEqual({
       error: {
         code: "MAIL_SEND_FAILED",
-        message: "Unable to send email right now."
-      }
+        message: "Unable to send email right now.",
+      },
     });
     expect(response.body.includes("real-user@example.com")).toBe(false);
   });
@@ -117,23 +117,23 @@ describe("POST /api/v1/mail/send", () => {
       mail: createMailModule({
         async sendEmail() {
           throw new Error("unexpected smtp failure");
-        }
-      })
+        },
+      }),
     });
 
     app.log.level = "silent";
 
     const response = await app.inject({
       headers: {
-        authorization: "Bearer secret-token"
+        authorization: "Bearer secret-token",
       },
       method: "POST",
       payload: {
         subject: "Hello",
         text: "Body",
-        to: "recipient@example.com"
+        to: "recipient@example.com",
       },
-      url: "/api/v1/mail/send"
+      url: "/api/v1/mail/send",
     });
 
     await app.close();
@@ -142,8 +142,8 @@ describe("POST /api/v1/mail/send", () => {
     expect(response.json()).toEqual({
       error: {
         code: "INTERNAL_ERROR",
-        message: "Internal server error"
-      }
+        message: "Internal server error",
+      },
     });
     expect(response.body.includes("unexpected smtp failure")).toBe(false);
   });
@@ -154,23 +154,23 @@ describe("POST /api/v1/mail/send", () => {
       mail: createMailModule({
         async sendEmail() {
           return "message-456";
-        }
-      })
+        },
+      }),
     });
 
     app.log.level = "silent";
 
     const response = await app.inject({
       headers: {
-        authorization: "Bearer secret-token"
+        authorization: "Bearer secret-token",
       },
       method: "POST",
       payload: {
         subject: "Hello",
         text: "Body",
-        to: "recipient@example.com"
+        to: "recipient@example.com",
       },
-      url: "/api/v1/mail/send"
+      url: "/api/v1/mail/send",
     });
 
     await app.close();
@@ -178,7 +178,7 @@ describe("POST /api/v1/mail/send", () => {
     expect(response.statusCode).toBe(200);
     expect(response.json()).toEqual({
       message: "Email sent successfully",
-      messageId: "message-456"
+      messageId: "message-456",
     });
   });
 });

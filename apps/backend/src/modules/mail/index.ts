@@ -21,7 +21,7 @@ export function createMailModule(config: SmtpConfig): MailModule {
     auth: config.auth,
     host: config.host,
     port: config.port,
-    secure: config.secure
+    secure: config.secure,
   });
 
   return {
@@ -35,13 +35,13 @@ export function createMailModule(config: SmtpConfig): MailModule {
           html: input.html,
           subject: input.subject,
           text: input.text,
-          to: input.to
+          to: input.to,
         });
 
         return info.messageId;
       } catch (error) {
         throw mailSendFailed(error);
       }
-    }
+    },
   };
 }

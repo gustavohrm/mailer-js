@@ -10,12 +10,12 @@ async function startServer(): Promise<void> {
 
   const app = buildApp({
     authBearerToken: config.auth.bearerToken,
-    mail
+    mail,
   });
 
   await app.listen({
     host: "0.0.0.0",
-    port: config.port
+    port: config.port,
   });
 }
 

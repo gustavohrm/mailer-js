@@ -1,13 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  AppError,
-  internalError,
-  invalidRequest,
-  isAppError,
-  mailSendFailed,
-  unauthorized
-} from "./index.js";
+import { AppError, internalError, invalidRequest, isAppError, mailSendFailed, unauthorized } from "./index.js";
 
 describe("AppError helpers", () => {
   it("creates invalid request errors with an exposed 400 response", () => {
@@ -19,7 +12,7 @@ describe("AppError helpers", () => {
       expose: true,
       message: "Field 'text' is required",
       name: "AppError",
-      statusCode: 400
+      statusCode: 400,
     });
     expect(isAppError(error)).toBe(true);
   });
@@ -31,7 +24,7 @@ describe("AppError helpers", () => {
       code: "UNAUTHORIZED",
       expose: true,
       message: "Unauthorized",
-      statusCode: 401
+      statusCode: 401,
     });
   });
 
@@ -50,7 +43,7 @@ describe("AppError helpers", () => {
       code: "MAIL_SEND_FAILED",
       expose: true,
       message: "Unable to send email right now.",
-      statusCode: 503
+      statusCode: 503,
     });
   });
 
@@ -63,7 +56,7 @@ describe("AppError helpers", () => {
       code: "INTERNAL_ERROR",
       expose: true,
       message: "Internal server error",
-      statusCode: 500
+      statusCode: 500,
     });
   });
 

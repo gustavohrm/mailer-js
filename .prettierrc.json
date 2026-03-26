@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "printWidth": 120,
+  "trailingComma": "all",
+  "singleQuote": false,
+  "semi": true,
+  "bracketSpacing": true
+}

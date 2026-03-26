@@ -51,7 +51,7 @@ function parseSendMailBody(body: unknown): SendMailInput {
     html: body.html,
     subject: body.subject,
     text: body.text,
-    to: body.to
+    to: body.to,
   };
 }
 
@@ -67,7 +67,7 @@ export function registerMailRoutes(options: BuildAppOptions): FastifyPluginAsync
 
       return reply.status(200).send({
         message: "Email sent successfully",
-        messageId
+        messageId,
       });
     });
   };

@@ -95,12 +95,12 @@ function readSmtpAuth() {
 
 export function loadConfig(): AppConfig {
   dotenv.config({
-    path: envFilePath
+    path: envFilePath,
   });
 
   return {
     auth: {
-      bearerToken: readRequiredEnv("API_BEARER_TOKEN")
+      bearerToken: readRequiredEnv("API_BEARER_TOKEN"),
     },
     port: readPort(process.env.PORT, 3000),
     smtp: {
@@ -108,7 +108,7 @@ export function loadConfig(): AppConfig {
       from: readRequiredEnv("SMTP_FROM"),
       host: readRequiredEnv("SMTP_HOST"),
       port: readSmtpPort(process.env.SMTP_PORT),
-      secure: readBoolean(process.env.SMTP_SECURE, false)
-    }
+      secure: readBoolean(process.env.SMTP_SECURE, false),
+    },
   };
 }

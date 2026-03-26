@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "htmlWhitespaceSensitivity": "ignore",
+  "plugins": ["prettier-plugin-tailwindcss"]
+}

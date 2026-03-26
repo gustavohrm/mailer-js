@@ -11,7 +11,7 @@ export type BuildAppOptions = {
 
 export function buildApp(options: BuildAppOptions): FastifyInstance {
   const app = Fastify({
-    logger: true
+    logger: true,
   });
 
   app.setErrorHandler((error, request, reply) => {
@@ -25,13 +25,13 @@ export function buildApp(options: BuildAppOptions): FastifyInstance {
     return reply.status(appError.statusCode).send({
       error: {
         code: appError.code,
-        message
-      }
+        message,
+      },
     });
   });
 
   app.register(registerRoutes(options), {
-    prefix: "/api/v1"
+    prefix: "/api/v1",
   });
 
   return app;
