@@ -1,6 +1,26 @@
 import dotenv from "dotenv";
+import { fileURLToPath } from "node:url";
 
-dotenv.config();
+const envFilePath = fileURLToPath(new URL("../../../../../.env", import.meta.url));
+
+export type SmtpConfig = {
+  auth?: {
+    pass: string;
+    user: string;
+  };
+  from: string;
+  host: string;
+  port: number;
+  secure: boolean;
+};
+
+export type AppConfig = {
+  auth: {
+    bearerToken: string;
+  };
+  port: number;
+  smtp: SmtpConfig;
+};
 
 function readRequiredEnv(name: string): string {
   const value = process.env[name];
@@ -73,16 +93,22 @@ function readSmtpAuth() {
   return { user, pass };
 }
 
-export const config = {
-  auth: {
-    bearerToken: readRequiredEnv("API_BEARER_TOKEN")
-  },
-  port: readPort(process.env.PORT, 3000),
-  smtp: {
-    auth: readSmtpAuth(),
-    host: readRequiredEnv("SMTP_HOST"),
-    port: readSmtpPort(process.env.SMTP_PORT),
-    secure: readBoolean(process.env.SMTP_SECURE, false),
-    from: readRequiredEnv("SMTP_FROM")
-  }
-};
+export function loadConfig(): AppConfig {
+  dotenv.config({
+    path: envFilePath
+  });
+
+  return {
+    auth: {
+      bearerToken: readRequiredEnv("API_BEARER_TOKEN")
+    },
+    port: readPort(process.env.PORT, 3000),
+    smtp: {
+      auth: readSmtpAuth(),
+      from: readRequiredEnv("SMTP_FROM"),
+      host: readRequiredEnv("SMTP_HOST"),
+      port: readSmtpPort(process.env.SMTP_PORT),
+      secure: readBoolean(process.env.SMTP_SECURE, false)
+    }
+  };
+}

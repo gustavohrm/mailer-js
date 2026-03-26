@@ -2,7 +2,9 @@
 
 A simple Node.js mailer service built with TypeScript, Fastify, and Nodemailer.
 
-It starts an HTTP server and exposes a `POST /send-email` endpoint that sends emails through an SMTP server.
+The repository is organized as a small npm workspace monorepo. Right now it contains a single backend app in `apps/backend`, while the root `package.json` still orchestrates the main commands.
+
+The backend starts an HTTP server and exposes a versioned API that sends emails through an SMTP server.
 
 ## Requirements
 
@@ -32,7 +34,7 @@ SMTP_FROM=no-reply@example.com
 ```
 
 `SMTP_USER` and `SMTP_PASS` are optional, but if your SMTP server requires authentication, both must be set.
-`API_BEARER_TOKEN` is required and must be sent as a bearer token when calling `POST /send-email`.
+`API_BEARER_TOKEN` is required and must be sent as a bearer token when calling `POST /api/v1/mail/send`.
 
 ## Running
 
@@ -48,20 +50,20 @@ Production:
 npm start
 ```
 
-`npm start` builds the project and runs the compiled server from `dist/`.
+`npm start` builds the project and runs the compiled backend from `apps/backend/dist/`.
 
 ## API
 
 Health check:
 
 ```http
-GET /health
+GET /api/v1/health
 ```
 
 Send email:
 
 ```http
-POST /send-email
+POST /api/v1/mail/send
 Content-Type: application/json
 Authorization: Bearer your-token
 ```
@@ -80,7 +82,7 @@ Example request body:
 Example with `curl`:
 
 ```bash
-curl -X POST http://localhost:3000/send-email \
+curl -X POST http://localhost:3000/api/v1/mail/send \
   -H "Authorization: Bearer your-token" \
   -H "Content-Type: application/json" \
   -d "{\"to\":\"recipient@example.com\",\"subject\":\"Hello\",\"text\":\"This is a test email.\"}"
