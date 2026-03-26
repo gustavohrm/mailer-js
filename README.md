@@ -1,10 +1,16 @@
 # Mailer.js
 
-A simple Node.js mailer service built with TypeScript, Fastify, and Nodemailer.
+A small mailer app workspace built with TypeScript, Fastify, Vite, Tailwind CSS, and Nodemailer.
 
-The repository is organized as a small npm workspace monorepo. Right now it contains a single backend app in `apps/backend`, while the root `package.json` still orchestrates the main commands.
+The repository is organized as an npm workspace monorepo with:
 
-The backend starts an HTTP server and exposes a versioned API that sends emails through an SMTP server.
+- `apps/backend` for the Fastify API and production server
+- `apps/frontend` for the Vite-powered frontend shell
+
+The app runs in two different modes:
+
+- Development: Vite serves the frontend on the public port and proxies `/api/*` requests to the backend.
+- Production: Frontend and backend are deployed independently; the backend exposes only the API under `/api/v1/*`.
 
 ## Requirements
 
@@ -44,13 +50,21 @@ Development:
 npm run dev
 ```
 
+This starts the full development environment with one public URL. Vite serves the frontend on the `PORT` from `.env` and proxies API requests to the backend running on an internal port.
+
 Production:
 
 ```bash
+npm run build
 npm start
 ```
 
-`npm start` builds the project and runs the compiled backend from `apps/backend/dist/`.
+`npm run build` builds both frontend and backend artifacts independently. `npm start` runs frontend preview on `PORT` (from `.env`, default `3000`) and proxies `/api/*` to the backend API running internally on `3001`.
+
+If you want to run only one service:
+
+- Backend only: `npm run start:backend`
+- Frontend only (preview): `npm run start:frontend`
 
 ## Testing
 

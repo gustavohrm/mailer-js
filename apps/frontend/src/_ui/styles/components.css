@@ -1,0 +1,40 @@
+@layer components {
+  .primary-btn {
+    @apply bg-primary hover:bg-primary-hover text-primary-contrast relative flex w-fit items-center justify-center gap-2 rounded-md px-4 py-2 font-semibold whitespace-nowrap transition-colors duration-400 [&.loading]:text-transparent!;
+
+    &.loading::after {
+      @apply border-primary-contrast absolute inset-1/2 size-4 -translate-1/2 animate-spin rounded-full border-2 border-b-transparent;
+      content: "";
+    }
+  }
+
+  .secondary-btn {
+    @apply bg-accent hover:bg-accent-hover text-accent-contrast flex min-h-10 w-fit items-center justify-center gap-2 rounded-md px-4 py-2 font-semibold transition-colors duration-400;
+  }
+
+  .tooltip {
+    @apply relative;
+
+    &[data-tooltip-position="top"]::after {
+      @apply -top-2 left-1/2 origin-bottom -translate-x-1/2 -translate-y-full;
+    }
+    &[data-tooltip-position="bottom"]::after {
+      @apply -bottom-2 left-1/2 origin-top -translate-x-1/2 translate-y-full;
+    }
+    &[data-tooltip-position="left"]::after {
+      @apply top-1/2 -left-2 origin-right -translate-x-full -translate-y-1/2;
+    }
+    &[data-tooltip-position="right"]::after {
+      @apply top-1/2 -right-2 origin-left translate-x-full -translate-y-1/2;
+    }
+
+    &::after {
+      content: attr(data-tooltip);
+      @apply bg-surface text-text pointer-events-none absolute z-50 w-max max-w-3xs scale-0 rounded-md p-2 text-sm font-normal shadow-sm transition-transform duration-200;
+    }
+
+    &:hover::after {
+      @apply scale-100;
+    }
+  }
+}
