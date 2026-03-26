@@ -52,6 +52,34 @@ npm start
 
 `npm start` builds the project and runs the compiled backend from `apps/backend/dist/`.
 
+## Testing
+
+Run all backend tests:
+
+```bash
+npm test
+```
+
+Run unit tests only:
+
+```bash
+npm run test:unit
+```
+
+Run integration tests only:
+
+```bash
+npm run test:integration
+```
+
+Use `npm run test:watch --workspace @mailer/backend` for local watch mode.
+
+Test layout:
+
+- Unit tests live next to the source files they cover under `apps/backend/src/**`.
+- Integration tests live in `apps/backend/tests/integration/**`.
+- `apps/backend/tests/e2e/**` is reserved for future end-to-end coverage.
+
 ## API
 
 Health check:
