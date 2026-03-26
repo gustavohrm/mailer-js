@@ -74,6 +74,9 @@ function readSmtpAuth() {
 }
 
 export const config = {
+  auth: {
+    bearerToken: readRequiredEnv("API_BEARER_TOKEN")
+  },
   port: readPort(process.env.PORT, 3000),
   smtp: {
     auth: readSmtpAuth(),

@@ -22,6 +22,7 @@ npm install
 
 ```env
 PORT=3000
+API_BEARER_TOKEN=change-me
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_SECURE=false
@@ -31,6 +32,7 @@ SMTP_FROM=no-reply@example.com
 ```
 
 `SMTP_USER` and `SMTP_PASS` are optional, but if your SMTP server requires authentication, both must be set.
+`API_BEARER_TOKEN` is required and must be sent as a bearer token when calling `POST /send-email`.
 
 ## Running
 
@@ -61,6 +63,7 @@ Send email:
 ```http
 POST /send-email
 Content-Type: application/json
+Authorization: Bearer your-token
 ```
 
 Example request body:
@@ -78,6 +81,7 @@ Example with `curl`:
 
 ```bash
 curl -X POST http://localhost:3000/send-email \
+  -H "Authorization: Bearer your-token" \
   -H "Content-Type: application/json" \
   -d "{\"to\":\"recipient@example.com\",\"subject\":\"Hello\",\"text\":\"This is a test email.\"}"
 ```
