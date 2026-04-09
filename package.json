@@ -2,25 +2,23 @@
   "name": "mailer-js",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
   "scripts": {
-    "dev": "concurrently -k -n frontend,backend -c green,blue \"npm run dev --workspace @mailer/frontend\" \"cross-env PORT=3001 npm run dev --workspace @mailer/backend\"",
-    "build": "npm run build --workspace @mailer/frontend && npm run build --workspace @mailer/backend",
+    "dev": "concurrently -k -n frontend,backend -c green,blue \"pnpm --filter @mailer/frontend dev\" \"cross-env PORT=3001 pnpm --filter @mailer/backend dev\"",
+    "build": "pnpm --filter @mailer/frontend build && pnpm --filter @mailer/backend build",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "test": "npm run test --workspace @mailer/backend",
-    "test:unit": "npm run test:unit --workspace @mailer/backend",
-    "test:integration": "npm run test:integration --workspace @mailer/backend",
-    "start": "concurrently -k -n frontend,backend -c green,blue \"npm run start:frontend\" \"npm run start:backend\"",
-    "start:frontend": "npm run preview --workspace @mailer/frontend",
-    "start:backend": "cross-env PORT=3001 npm run start --workspace @mailer/backend"
+    "test": "pnpm --filter @mailer/backend test",
+    "test:unit": "pnpm --filter @mailer/backend test:unit",
+    "test:integration": "pnpm --filter @mailer/backend test:integration",
+    "start": "concurrently -k -n frontend,backend -c green,blue \"pnpm run start:frontend\" \"pnpm run start:backend\"",
+    "start:frontend": "pnpm --filter @mailer/frontend preview",
+    "start:backend": "cross-env PORT=3001 pnpm --filter @mailer/backend start"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "prettier": "^3.8.1"
   },
-  "type": "module"
+  "type": "module",
+  "packageManager": "pnpm@10.33.0"
 }
