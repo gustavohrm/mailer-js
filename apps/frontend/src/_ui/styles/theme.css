@@ -23,10 +23,10 @@
   --color-warning-contrast: var(--color-amber-50);
   --color-warning-light: var(--color-amber-100);
   --color-warning-dark: var(--color-amber-800);
-  --color-error: var(--color-rose-500);
-  --color-error-contrast: var(--color-rose-50);
-  --color-error-light: var(--color-rose-100);
-  --color-error-dark: var(--color-rose-800);
+  --color-destructive: var(--color-rose-500);
+  --color-destructive-contrast: var(--color-rose-50);
+  --color-destructive-light: var(--color-rose-100);
+  --color-destructive-dark: var(--color-rose-800);
   --color-info: var(--color-sky-500);
   --color-info-contrast: var(--color-sky-50);
   --color-info-light: var(--color-sky-100);
