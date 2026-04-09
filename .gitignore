@@ -6,5 +6,10 @@ dist
 apps/backend/public
 
 # Environment variables
-.env* 
+.env*
 !.env.example
+
+# AI agents
+.claude
+.codex
+.gemini

@@ -15,7 +15,7 @@ The app runs in two different modes:
 ## Requirements
 
 - Node.js 24 or newer
-- npm
+- pnpm 10 or newer
 - Access to an SMTP server
 
 ## Setup
@@ -23,7 +23,7 @@ The app runs in two different modes:
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Create a `.env` file based on `.env.example` and fill in your SMTP settings:
@@ -47,7 +47,7 @@ SMTP_FROM=no-reply@example.com
 Development:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 This starts the full development environment with one public URL. Vite serves the frontend on the `PORT` from `.env` and proxies API requests to the backend running on an internal port.
@@ -55,38 +55,38 @@ This starts the full development environment with one public URL. Vite serves th
 Production:
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
 ```
 
-`npm run build` builds both frontend and backend artifacts independently. `npm start` runs frontend preview on `PORT` (from `.env`, default `3000`) and proxies `/api/*` to the backend API running internally on `3001`.
+`pnpm build` builds both frontend and backend artifacts independently. `pnpm start` runs frontend preview on `PORT` (from `.env`, default `3000`) and proxies `/api/*` to the backend API running internally on `3001`.
 
 If you want to run only one service:
 
-- Backend only: `npm run start:backend`
-- Frontend only (preview): `npm run start:frontend`
+- Backend only: `pnpm start:backend`
+- Frontend only (preview): `pnpm start:frontend`
 
 ## Testing
 
 Run all backend tests:
 
 ```bash
-npm test
+pnpm test
 ```
 
 Run unit tests only:
 
 ```bash
-npm run test:unit
+pnpm test:unit
 ```
 
 Run integration tests only:
 
 ```bash
-npm run test:integration
+pnpm test:integration
 ```
 
-Use `npm run test:watch --workspace @mailer/backend` for local watch mode.
+Use `pnpm --filter @mailer/backend test:watch` for local watch mode.
 
 Test layout:
 
